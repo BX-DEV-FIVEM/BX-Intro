@@ -23,6 +23,10 @@
 
 
 
+
+**🚨 Don't forget to add "TriggerEvent('bx:StartLaScene')" in your custom script if Config.NpcOn = false 🚨**
+
+***
 **Dependencies**
 
 * **ESX**
