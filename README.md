@@ -52,6 +52,8 @@ Config.StarterPackItems = { -- if Config.StartPack = true
     {item = "bread", amount = 1}
 }
 
+Config.WaitDuringCinematic = vector3(-1625.0665, -3160.8740, 13.9959) -- Tp player during plane cinematic
+
 Config.CheckUpdate = true
 
 ----- NPC Setting ----- 
@@ -62,15 +64,16 @@ Config.NpcOn = true -- if start with interaction with NPC / false you have to tr
 Config.NPC = { -- if Config.NpcOn = true
     PedType = 26,
     Model = 'cs_movpremmale',  -- NPC model
-    x = -512.0,y = -256.0,z = 34.5, h = 190.0   -- Pos NPC
+    x = -1122.051 ,y = -2791.3450, z = 15.5906, h = 239.8188   -- Pos NPC  
 }
+
 
 
 
 ----- Notify Setting ----- 
 
 
-Config.ShowNotify = 'esx' -- Default ( DisplayHelpText ) / esx ( ESX.TextUI ) / okok (OKOK.TextUi) / ox ( Ox.Lib ) -- don't forget to uncomment  '@ox_lib/init.lua', in manifest
+Config.ShowNotify = 'ox' -- default ( DisplayHelpText ) / esx ( ESX.TextUI ) / okok (OKOK.TextUi) / ox ( Ox.Lib ) -- don't forget to uncomment  '@ox_lib/init.lua', in manifest
 
 
 ----- Taxi Setting ----- 
@@ -88,7 +91,7 @@ Config.TaxiSpawn = vector4(-1058.48, -2713.28, 20.17, 240.05)       --Taxi First
 
 Config.TaxiDestination = vector3(-521.7092, -266.4742, 35.3202)         --Taxi Destination Lcoation   
 
-Config.TaxiSpeed = 50.0
+Config.TaxiSpeed = 25.0
 
 Config.TaxiDrivingStyle = 524863
 
@@ -118,6 +121,8 @@ Strings = { --- translation
     ['start'] = '[E] - Start the adventure',
     ['presstoskip'] = 'To Skip',
 }
+
+
 
 
 
