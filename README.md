@@ -139,7 +139,7 @@ Strings = { --- translation
 ***
 **Live Preview**
 
-[YOUTUBE](https://www.youtube.com/watch?v=L5CmgFKxnKA)
+[YOUTUBE](https://www.youtube.com/watch?v=E-sW5ZYng54)
 
 
 ***
