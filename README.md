@@ -30,8 +30,12 @@
 
 ***
 
-**🚨 Don't forget to add "TriggerEvent('bx:StartLaScene')" in your custom script if Config.NpcOn = false 🚨**
+**🚨**
 
+* **⚠️Don't forget to add "TriggerEvent('bx:StartLaScene')" in your custom script if Config.NpcOn = false**
+* **⚠️ADD SQL FILE**
+
+**🚨**
 ***
 **Dependencies**
 
