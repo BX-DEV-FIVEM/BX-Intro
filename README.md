@@ -21,8 +21,14 @@
 
 ***
 
+***🚀 UPDATE 🚀*** 
+
+* **☑️ ADD SQL CHECK**: Check if player have already do the intro ( one use per player ).
+* **🧑‍🤝‍🧑 Femal Skin fix** : Fix the character's look (male or female) on the plane.
+* **🕶️ Invisibility** : During the taxi animation, the player is in 'ghost mode' for an interference-free experience
 
 
+***
 
 **🚨 Don't forget to add "TriggerEvent('bx:StartLaScene')" in your custom script if Config.NpcOn = false 🚨**
 
