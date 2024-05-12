@@ -1,6 +1,6 @@
 
 
-local version = 'V1.0'
+local version = 'V.2.0'
 local expectedResourceName = "BX-Intro"
 
 if Config.CheckUpdate then
@@ -16,8 +16,6 @@ if Config.CheckUpdate then
                 print("^1Error checking version: GitHub is having issues or the manifest file is not accessible.^0")
                 return
             end
-
-            -- Pattern pour extraire la version depuis le contenu de version.lua
             local latestVersion = result:match("local version = ['\"](%S+)['\"]")
 
             if latestVersion == nil then
