@@ -78,11 +78,7 @@ if Config.NpcOn then
                 end
 
                 if IsControlJustReleased(0, 51) then
-                    DoScreenFadeOut(250)
-                    TriggerEvent('bx:StartLaScene')
-                    Wait(2500)
-                    teleportPlayer(Config.WaitDuringCinematic.x, Config.WaitDuringCinematic.y, Config.WaitDuringCinematic.z)
-                    DoScreenFadeIn(250)
+                    CkeckIntroStart()
                 end
 
                 Citizen.Wait(0)
@@ -110,6 +106,22 @@ function DisplayHelpText(text)
     AddTextComponentString(text)
     DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 end
+
+
+function CkeckIntroStart()
+    TriggerServerEvent('bx:checkintro')
+end
+
+RegisterNetEvent('bx:startintro')
+AddEventHandler('bx:startintro', function()
+DoScreenFadeOut(250)
+TriggerEvent('bx:StartLaScene')
+ Wait(2500)
+ TriggerServerEvent('bx:setPlayerBucket', GetPlayerServerId(PlayerId()), 1)
+ teleportPlayer(Config.WaitDuringCinematic.x, Config.WaitDuringCinematic.y, Config.WaitDuringCinematic.z)
+ DoScreenFadeIn(250)
+
+end)
 
 
 
@@ -186,7 +198,12 @@ local isTaxi = false
 local Active = false
 
 
-local sub_b0b5 = { 
+
+
+
+
+
+local sub_b0b5 = {
     [0] = "MP_Plane_Passenger_1",
     [1] = "MP_Plane_Passenger_2",
     [2] = "MP_Plane_Passenger_3",
@@ -356,47 +373,43 @@ end
 
 
 
-
 RegisterNetEvent('bx:StartLaScene', function()
     TriggerEvent('MusiqueBienvenue')
     local plyrId = PlayerPedId() 
-    local gender = IsPedMale(plyrId)
-    -----------------------------------------------
-    if gender then
-        RequestCutsceneWithPlaybackList("MP_INTRO_CONCAT", 31, 8)
-    else	
-        RequestCutsceneWithPlaybackList("MP_INTRO_CONCAT", 103, 8)
-    end
+    if IsMale(plyrId) then
+		RequestCutsceneWithPlaybackList("MP_INTRO_CONCAT", 31, 8)
+	else	
+		RequestCutsceneWithPlaybackList("MP_INTRO_CONCAT", 103, 8)
+	end
     while not HasCutsceneLoaded() do Wait(10) end 
-    if gender then
-        RegisterEntityForCutscene(0, 'MP_Male_Character', 3, GetEntityModel(PlayerPedId()), 0)
-        RegisterEntityForCutscene(PlayerPedId(), 'MP_Male_Character', 0, 0, 0)
-        SetCutsceneEntityStreamingFlags('MP_Male_Character', 0, 1) 
-        local female = RegisterEntityForCutscene(0,"MP_Female_Character",3,0,64) 
-        NetworkSetEntityInvisibleToNetwork(female, true)
-    else
-        RegisterEntityForCutscene(0, 'MP_Female_Character', 3, GetEntityModel(PlayerPedId()), 0)
-        RegisterEntityForCutscene(PlayerPedId(), 'MP_Female_Character', 0, 0, 0)
-        SetCutsceneEntityStreamingFlags('MP_Female_Character', 0, 1) 
-        local male = RegisterEntityForCutscene(0,"MP_Male_Character",3,0,64) 
-        NetworkSetEntityInvisibleToNetwork(male, true)
-    end
-    local ped = {}
-    for v_3=0, 6, 1 do
-        if v_3 == 1 or v_3 == 2 or v_3 == 4 or v_3 == 6 then
-            ped[v_3] = CreatePed(26, `mp_f_freemode_01`, -1117.77783203125, -1557.6248779296875, 3.3819, 0.0, 0, 0)
-        else
-            ped[v_3] = CreatePed(26, `mp_m_freemode_01`, -1117.77783203125, -1557.6248779296875, 3.3819, 0.0, 0, 0)
-        end
+	if IsMale(plyrId) then
+		RegisterEntityForCutscene(0, 'MP_Male_Character', 3, GetEntityModel(PlayerPedId()), 0)
+		RegisterEntityForCutscene(PlayerPedId(), 'MP_Male_Character', 0, 0, 0)
+		SetCutsceneEntityStreamingFlags('MP_Male_Character', 0, 1) 
+		local female = RegisterEntityForCutscene(0,"MP_Female_Character",3,0,64) 
+		NetworkSetEntityInvisibleToNetwork(female, true)
+	else
+		RegisterEntityForCutscene(0, 'MP_Female_Character', 3, GetEntityModel(PlayerPedId()), 0)
+		RegisterEntityForCutscene(PlayerPedId(), 'MP_Female_Character', 0, 0, 0)
+		SetCutsceneEntityStreamingFlags('MP_Female_Character', 0, 1) 
+		local male = RegisterEntityForCutscene(0,"MP_Male_Character",3,0,64) 
+		NetworkSetEntityInvisibleToNetwork(male, true)
+	end
+	local ped = {}
+	for v_3=0, 6, 1 do
+		if v_3 == 1 or v_3 == 2 or v_3 == 4 or v_3 == 6 then
+			ped[v_3] = CreatePed(26, `mp_f_freemode_01`, -1117.77783203125, -1557.6248779296875, 3.3819, 0.0, 0, 0)
+		else
+			ped[v_3] = CreatePed(26, `mp_m_freemode_01`, -1117.77783203125, -1557.6248779296875, 3.3819, 0.0, 0, 0)
+		end
         if not IsEntityDead(ped[v_3]) then
-                sub_b747(ped[v_3], v_3)
+			sub_b747(ped[v_3], v_3)
             FinalizeHeadBlend(ped[v_3])
             RegisterEntityForCutscene(ped[v_3], sub_b0b5[v_3], 0, 0, 64)
         end
     end
-     
-    NewLoadSceneStartSphere(-1212.79, -1673.52, 7, 1000, 0) 
-    -----------------------------------------------
+	
+	NewLoadSceneStartSphere(-1212.79, -1673.52, 7, 1000, 0) 
     SetWeatherTypeNow("EXTRASUNNY")
     StartCutscene(4)
         
@@ -420,6 +433,14 @@ RegisterNetEvent('bx:StartLaScene', function()
     end
 end) 
 
+
+function IsMale(ped)
+	if IsPedModel(ped, 'mp_m_freemode_01') then
+		return true
+	else
+		return false
+	end
+end
 
 
 
@@ -468,6 +489,7 @@ function CreateTaxi(x, y, z)
                 SetPedIntoVehicle(PlayerPedId(), taxiVeh, 0)
                 if IsPedInVehicle(PlayerPedId(), taxiVeh, 1) then
                     DoScreenFadeIn(250)
+                    TriggerServerEvent('bx:setEntityBucket', taxiPed, 1)
                     SetVehicleDoorsLocked(taxiVeh, 4)
                     SetVehicleRadioEnabled(taxiVeh, false)
                     TaskVehicleDriveToCoord(taxiPed, taxiVeh, Config.TaxiDestination.x, Config.TaxiDestination.y, Config.TaxiDestination.z, Config.TaxiSpeed, 0, GetEntityModel(taxiVeh), Config.TaxiDrivingStyle, 2.0)
@@ -506,6 +528,7 @@ Citizen.CreateThread(function()
                TaskVehicleDriveToCoord(taxiPed, vehicle, Config.NewDestination.x, Config.NewDestination.y, Config.NewDestination.z, Config.NewDestination.w, 0, GetEntityModel(vehicle), 1074528293, 10.0)
                Wait(15000)
                 DeleteTaxi(vehicle, taxiPed)
+                TriggerServerEvent('bx:restorePlayerBucket', GetPlayerServerId(PlayerId()))
                 Active = false
                 isTaxi = false
             end
@@ -531,54 +554,10 @@ end)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function teleportPlayer(x, y, z)
-    -- Assurez-vous que le joueur est valide.
     local playerPed = PlayerPedId()
     if playerPed then
-        -- Téléporte le joueur aux coordonnées (x, y, z)
         SetEntityCoords(playerPed, x, y, z, false, false, false, true)
     end
 end
 
-
-function walkTo(x, y, z)
-    local playerPed = PlayerPedId()
-    if playerPed then
-        -- Faites marcher le joueur vers les coordonnées (x, y, z)
-        TaskGoStraightToCoord(playerPed, x, y, z, 1.0, -1, 0.0, 0.0)
-    end
-end
-
-
-
-local teleportCoords = {x = -1099.11, y = -2804.7644, z = 16.5906}
--- Coordonnées de la destination à marcher
-local walkCoords = {x = -1119.6359, y = -2792.6978, z = 16.5906} 
-
-RegisterCommand("moveMyPlayer", function()
-   
-    xSound:Destroy("name")
-    teleportPlayer(teleportCoords.x, teleportCoords.y, teleportCoords.z)
-    -- Donne un petit délai avant de marcher, pour que la téléportation se termine
-    Citizen.Wait(1000) -- Délai de 1 seconde
-    -- Fait marcher le joueur
-    walkTo(walkCoords.x, walkCoords.y, walkCoords.z)
-end, false)
