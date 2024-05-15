@@ -26,5 +26,4 @@ shared_scripts {
     '@ox_lib/init.lua'  -- if OX Lib
 }
 
-loadscreen 'html/index.html'
-loadscreen_manual_shutdown 'yes'
+
