@@ -41,7 +41,7 @@
 
 * **ESX**
 * **xSound** 
-
+* **ESX_TextUI** : Optional (https://github.com/BX-DEV-FIVEM/esx_TextUI)
 
 ***
 
