@@ -109,7 +109,11 @@ end
 
 
 function CkeckIntroStart()
+   if Config.DevMode then
+    TriggerEvent('bx:startintro')
+   else
     TriggerServerEvent('bx:checkintro')
+   end
 end
 
 RegisterNetEvent('bx:startintro')
@@ -426,6 +430,7 @@ RegisterNetEvent('bx:StartLaScene', function()
     if Config.useTaxi then
         DoScreenFadeIn(300)
         CreateTaxi(Config.TaxiSpawn)
+        xSound:Destroy("name")
     else
         DoScreenFadeIn(300)
         GiveStarterPack()
