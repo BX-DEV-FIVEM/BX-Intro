@@ -1,6 +1,6 @@
 
 
-local version = 'V.2.0'
+local version = 'V.3.0'
 local expectedResourceName = "BX-Intro"
 
 if Config.CheckUpdate then
