@@ -1,5 +1,7 @@
 Config = {}
 
+Config.DevMode = false
+
 ----- Setting ----- 
 
 Config.StartPack = true
