@@ -1,6 +1,6 @@
 Config = {}
 
-Config.DevMode = false
+Config.DevMode = false -- if true bypass sql check
 
 ----- Setting ----- 
 
