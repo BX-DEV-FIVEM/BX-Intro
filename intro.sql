@@ -1,4 +1,7 @@
 
 --- ADD SQL ---
 
-ALTER TABLE users ADD COLUMN intro_statut TINYINT(1) DEFAULT 0;
+CREATE TABLE BX_Intro (
+    player_id VARCHAR(50) PRIMARY KEY,
+    intro_statut BOOLEAN NOT NULL DEFAULT FALSE
+);
