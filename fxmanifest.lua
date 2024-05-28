@@ -5,7 +5,7 @@ lua54 'yes'
 name 'BX-Intro'
 author 'B3NDO'
 description 'Introduction for server'
-version 'V.2.0'
+version 'V.3.0'
 url 'https://github.com/xB3NDO'
 
 client_scripts {
