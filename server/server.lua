@@ -35,28 +35,80 @@ end)
 
 
 
+local usedPlayers = {}
+
+local function checkIfUsed(id, cb)
+    local _src = id
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local identifier = xPlayer.identifier
+
+    -- Vérifier dans le cache local
+    for _, player in ipairs(usedPlayers) do
+        if player.id == _src then
+            print("[INFO] Player already in cache, has seen the intro")
+            if cb then
+                return cb(true)
+            else
+                return true
+            end
+        end
+    end
+
+    -- Vérifier dans la base de données
+    MySQL.Async.fetchAll("SELECT intro_statut FROM BX_Intro WHERE player_id = @identifier", {
+        ['@identifier'] = identifier
+    }, function(result)
+        if result and #result > 0 and result[1].intro_statut then
+            table.insert(usedPlayers, {id = _src})
+            if cb then
+                return cb(true)
+            else
+                return true
+            end
+        else
+            if cb then
+                return cb(false)
+            else
+                return false
+            end
+        end
+    end)
+end
+
+local function updateUser(id, cb)
+    local _src = id
+    local xPlayer = ESX.GetPlayerFromId(_src)
+    local identifier = xPlayer.identifier
+
+    table.insert(usedPlayers, {id = _src})
+
+    MySQL.Async.execute("INSERT INTO BX_Intro (player_id, intro_statut) VALUES (@identifier, true) ON DUPLICATE KEY UPDATE intro_statut = true", {
+        ['@identifier'] = identifier
+    }, function(row)
+        if cb then
+            return cb(row > 0)
+        else
+            return row > 0
+        end
+    end)
+end
+
 RegisterServerEvent('bx:checkintro')
 AddEventHandler('bx:checkintro', function()
-    local _source = source
-    local xPlayer = ESX.GetPlayerFromId(_source)
-
-    if xPlayer then
-        local identifier = xPlayer.identifier
-        MySQL.Async.fetchScalar('SELECT intro_statut FROM users WHERE identifier = @identifier', {
-            ['@identifier'] = identifier
-        }, function(starterPackGiven)
-            starterPackGiven = tonumber(starterPackGiven)
-
-            if starterPackGiven == 0 then
-                MySQL.Async.execute('UPDATE users SET intro_statut = 1 WHERE identifier = @identifier', {
-                    ['@identifier'] = identifier
-                })
-                TriggerClientEvent('bx:startintro', _source)
-            else
-
-            end
-        end)
-    end
+    local _src = source
+    checkIfUsed(_src, function(hasSeenIntro)
+        if not hasSeenIntro then
+            updateUser(_src, function(success)
+                if success then
+                    TriggerClientEvent('bx:startintro', _src)
+                else
+                    print("[ERROR] Failed to update intro status for player " .. _src)
+                end
+            end)
+        else
+           -- print("[INFO] Player " .. _src .. " has already seen the intro")
+        end
+    end)
 end)
 
 
