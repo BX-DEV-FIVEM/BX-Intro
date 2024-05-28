@@ -1,5 +1,4 @@
 
---- ADD SQL ---
 
 CREATE TABLE BX_Intro (
     player_id VARCHAR(50) PRIMARY KEY,
