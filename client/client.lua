@@ -430,8 +430,8 @@ RegisterNetEvent('bx:StartLaScene', function()
     if Config.useTaxi then
         DoScreenFadeIn(300)
         CreateTaxi(Config.TaxiSpawn)
-        xSound:Destroy("name")
     else
+        xSound:Destroy("name")
         DoScreenFadeIn(300)
         GiveStarterPack()
         SetEntityCoords(plyrId, Config.SpawnPedLoc)
