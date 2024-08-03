@@ -1,10 +1,10 @@
 Config = {}
 
-Config.DevMode = false -- if true bypass sql check
+Config.DevMode = true -- if true bypass sql check
 
 ----- Setting ----- 
 
-Config.StartPack = true
+Config.StartPack = true -- Give StarterPackItems
 
 Config.StarterPackItems = { -- if Config.StartPack = true
     {item = "money", amount = 50},
@@ -18,7 +18,7 @@ Config.CheckUpdate = true
 ----- NPC Setting ----- 
 
 
-Config.NpcOn = true -- if start with interaction with NPC / false you have to trigger  TriggerEvent('bx:StartLaScene') for start
+Config.NpcOn = true --  Start with interaction with NPC / false you have to trigger  TriggerEvent('bx:StartLaScene') for start
 
 Config.NPC = { -- if Config.NpcOn = true
     PedType = 26,
@@ -38,7 +38,7 @@ Config.ShowNotify = 'ox' -- default ( DisplayHelpText ) / esx ( ESX.TextUI ) / o
 ----- Taxi Setting ----- 
 
 
-Config.useTaxi = true          --Use AI Taxi or Not?
+Config.useTaxi = false          --Use AI Taxi or Not?
 
 Config.SpawnPedLoc = vector3(-1044.91, -2750.2, 21.36)    --If not using AI Taxi then set player spawn location 
 
