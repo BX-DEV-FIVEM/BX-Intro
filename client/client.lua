@@ -22,6 +22,22 @@ local currentDestination = 1
 local IsMissionStarted = false
 
 
+if Config.DevMode then
+
+    RegisterCommand("BX_intro", function()
+        
+        TriggerEvent('bx:startintro')
+
+    end)
+
+    RegisterCommand("BX_intro_taxi", function()
+        
+        CreateTaxi(Config.TaxiSpawn)
+
+    end)
+
+end
+
 
 
 
