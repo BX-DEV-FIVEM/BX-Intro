@@ -26,6 +26,8 @@
 * **☑️ ADD SQL CHECK**: Check if player have already do the intro ( one use per player ).
 * **🧑‍🤝‍🧑 Femal Skin fix** : Fix the character's look (male or female) on the plane.
 * **🕶️ Invisibility** : During the taxi animation, the player is in 'ghost mode' for an interference-free experience
+* **🎵 FIX MUSIC** : WHEN Config.useTaxi = false
+* **🛠️ DEV MODE** : Bypass SQL check. (Use to check new positions…)
 
 
 ***
@@ -53,6 +55,10 @@
 ```lua
 Config = {}
 
+Config.DevMode = false
+
+Config.UseOldEsx = false 
+
 ----- Setting ----- 
 
 Config.StartPack = true
@@ -69,7 +75,7 @@ Config.CheckUpdate = true
 ----- NPC Setting ----- 
 
 
-Config.NpcOn = true -- if start with interaction with NPC / false you have to trigger  TriggerEvent('bx:StartLaScene') for start
+Config.NpcOn = true --  Start with interaction with NPC / false you have to trigger  TriggerEvent('bx:StartLaScene') for start
 
 Config.NPC = { -- if Config.NpcOn = true
     PedType = 26,
@@ -79,11 +85,10 @@ Config.NPC = { -- if Config.NpcOn = true
 
 
 
-
 ----- Notify Setting ----- 
 
 
-Config.ShowNotify = 'ox' -- default ( DisplayHelpText ) / esx ( ESX.TextUI ) / okok (OKOK.TextUi) / ox ( Ox.Lib ) -- don't forget to uncomment  '@ox_lib/init.lua', in manifest
+Config.ShowNotify = 'okok' -- default ( DisplayHelpText ) / esx ( ESX.TextUI ) / okok (OKOK.TextUi) / ox ( Ox.Lib ) -- don't forget to uncomment  '@ox_lib/init.lua', in manifest
 
 
 ----- Taxi Setting ----- 
@@ -118,7 +123,7 @@ Config.NewDestination = vector4(-1044.0, -2749.0, 37.47, 21.00) -- Coordinates w
 
 ----- Music Setting ----- 
 
-Config.MusiqueBienvenueURL = "https://www.youtube.com/watch?v=M4QSMqvuWMg" -- Must be a YouTube link
+Config.MusiqueBienvenueURL = "https://www.youtube.com/watch?v=M4QSMqvuWMg" -- Must be a YouTube link 
 Config.MusiqueBienvenueVolume = 0.5 -- Volume
 
 
@@ -131,8 +136,6 @@ Strings = { --- translation
     ['start'] = '[E] - Start the adventure',
     ['presstoskip'] = 'To Skip',
 }
-
-
 
 
 
