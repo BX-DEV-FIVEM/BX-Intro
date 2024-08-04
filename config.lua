@@ -1,10 +1,12 @@
 Config = {}
 
-Config.DevMode = true -- if true bypass sql check
+Config.DevMode = false
+
+Config.UseOldEsx = false 
 
 ----- Setting ----- 
 
-Config.StartPack = true -- Give StarterPackItems
+Config.StartPack = true
 
 Config.StarterPackItems = { -- if Config.StartPack = true
     {item = "money", amount = 50},
@@ -28,17 +30,16 @@ Config.NPC = { -- if Config.NpcOn = true
 
 
 
-
 ----- Notify Setting ----- 
 
 
-Config.ShowNotify = 'ox' -- default ( DisplayHelpText ) / esx ( ESX.TextUI ) / okok (OKOK.TextUi) / ox ( Ox.Lib ) -- don't forget to uncomment  '@ox_lib/init.lua', in manifest
+Config.ShowNotify = 'okok' -- default ( DisplayHelpText ) / esx ( ESX.TextUI ) / okok (OKOK.TextUi) / ox ( Ox.Lib ) -- don't forget to uncomment  '@ox_lib/init.lua', in manifest
 
 
 ----- Taxi Setting ----- 
 
 
-Config.useTaxi = false          --Use AI Taxi or Not?
+Config.useTaxi = true          --Use AI Taxi or Not?
 
 Config.SpawnPedLoc = vector3(-1044.91, -2750.2, 21.36)    --If not using AI Taxi then set player spawn location 
 
@@ -80,8 +81,6 @@ Strings = { --- translation
     ['start'] = '[E] - Start the adventure',
     ['presstoskip'] = 'To Skip',
 }
-
-
 
 
 
